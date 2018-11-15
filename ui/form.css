@@ -1,0 +1,74 @@
+/* Created by Viacheslav (Slava) Skryabin 01/01/2016 */
+
+body {
+  overflow: scroll; 
+}
+.well [class^="hidden-"] {
+  margin: 5px 0px 0px 0px;
+}
+
+.form-container {
+  margin: 0px 15px 0px 15px;
+  background-image: url('libs/images/fabric_of_squares_gray.png');
+}
+
+.form-summary {
+  background-color:#ffffff;
+  background-image: url('libs/images/sos.png');
+}
+
+.large {
+  font-size: 115%;
+}
+.extra-large {
+  font-size: 130%;
+}
+legend {
+  margin-left: 15px;
+}
+a:hover {
+  background-color: yellow;
+}
+.multi-select {
+  width: 30%;
+}
+label.checkbox_radio {
+  margin-bottom: 0px;
+  font-weight: initial;
+}
+input[type="radio"] {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+label.required:after {
+  color: red;
+  content: "*";
+}
+.error {
+  color: darkred;
+}
+.col-md-6:nth-child(2n+1):not(.clear-excluded) {
+  clear: left;
+}
+
+.ui-dialog {
+  font-size: 1em;
+}
+
+@media (min-width: 992px) {
+  .col-md-4:nth-child(3n+1) {
+    clear: left;
+  }
+  .md-padding-left {
+    padding-left: 5px;
+    margin-top: 20px;
+  }
+  textarea#address {
+    height: 82px;
+  }
+}
+@media (max-width: 992px) {
+  .col-sm-6:nth-child(2n+1):not(.clear-excluded), .agreedToPrivacyPolicy {
+    clear: left;
+  }
+}

@@ -1,0 +1,22 @@
+<!-- Created by Viacheslav (Slava) Skryabin 01/01/2016-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Additional Information</title>
+		<script type="text/javascript">
+			function sendMessage(element) {
+				var message = {};
+				message.key = element.id;
+				message.value = element.value;
+				parent.postMessage(message, "*");
+			}
+		</script>
+	</head>
+	<body>
+		<label>Contact Person Name</label>
+		<input type=text id="contactPersonName" oninput="sendMessage(this)" name="contactPersonName"/>
+		<br/><br/>
+		<label>Contact Person Phone</label>
+		<input type=text id="contactPersonPhone" oninput="sendMessage(this)" name="contactPersonPhone"/>
+	</body>
+</html>

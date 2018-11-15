@@ -1,0 +1,217 @@
+<!-- Created by Viacheslav (Slava) Skryabin 01/01/2016-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Sample Page</title>
+    <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>-->
+    <!--<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>-->
+    <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>-->
+    <!--<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>-->
+    <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>-->
+    <!--<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.min.css">-->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">-->
+    <script type="text/javascript" src="libs/jquery.min-2.2.0.js"></script>
+    <script type="text/javascript" src="libs/bootstrap.min-3.3.6.js"></script>
+    <script type="text/javascript" src="libs/jquery-ui.min-1.11.4.js"></script>
+    <script type="text/javascript" src="libs/jquery.validate.min-1.14.0.js"></script>
+    <script type="text/javascript" src="libs/angular.min-1.4.9.js"></script>
+    <link rel="stylesheet" href="libs/jquery-ui.min-1.11.4.css">
+    <link rel="stylesheet" href="libs/bootstrap.min-3.3.6.css">
+    <script type="text/javascript" src="ui/form.js"></script>
+    <link rel="stylesheet" href="ui/form.css">
+  </head>
+  <body ng-app="samplePage" ng-controller="SampleController">
+    <header>
+    </header>
+    <div id="samplePageResult" style="display: none;">
+      <fieldset>
+        <legend class="applicationResult">Submitted sample form data</legend>
+        <section>
+          <div class="well form-container container-fluid">
+            <div class="row">
+              <div>
+                <div ng-repeat="(key, value) in formData" ng-if="key != 'confirmPassword'" class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+                  <span>{{key | splitCamelCase}}</span>
+                  <b ng-if="key == 'password'" name="{{key}}" class="large">[entered]</b>
+                  <b ng-if="key != 'password'" name="{{key}}" class="large">{{value | joinIfArray}}</b>
+                </div>
+              </div>
+            </div>
+            <br/>
+            <button ng-click="return($event)" class="btn btn-primary" type="button" id="return" name="return">Return</button>
+          </div>
+        </section>
+      </fieldset>
+    </div>
+    <div id="samplePageForm">
+      <form ng-submit="submit($event)" name="sampleForm" id="sampleForm" action="" method="post">
+      <fieldset>
+      <legend class="application">Sample form with input elements</legend>
+        <section class="">
+          <div class="well container-fluid form-container">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="well form-summary">
+                  <div class="title">
+                    <b id="personalInfo" class="extra-large">Application</b>
+                  </div>
+                  <div class="row">
+                    <div class="hidden-xs col-sm-4 col-md-12 col-lg-12">
+                      <span>Location</span>
+                      <b id="location" class="large">Los Altos, CA 94022</b>
+                    </div>
+                    <div class="hidden-xs col-sm-4 col-md-12 col-lg-12">
+                      <span>Date</span>
+                      <b id="currentDate" class="large"></b>
+                    </div>
+                    <div class="hidden-xs col-sm-4 col-md-12 col-lg-12">
+                      <span>Time</span>
+                      <b id="currentTime" class="large"></b>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 md-padding-left">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 form-group">
+                  <label class="required" for="username">Username</label>
+                  <input ng-model="formData.username" required class="form-control" type="text" name="username" maxlength="40"/>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 form-group">
+                  <label class="required" for="email">Email</label>
+                  <input ng-model="formData.email" required class="form-control" type="email" name="email" maxlength="100"/>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 form-group">
+                  <label class="required" for="password">Password</label>
+                  <input ng-model="formData.password" required class="form-control" type="password" name="password" id="password" maxlength="40"/>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 form-group">
+                  <label class="required" for="confirmPassword">Confirm Password</label>
+                  <input ng-model="formData.confirmPassword" required class="form-control" type="password" name="confirmPassword" id="confirmPassword" maxlength="40" disabled/>
+                </div>
+              </div>
+            </div>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 form-group">
+                  <label class="required" for="name">Name</label>
+                  <input ng-model="formData.name" required class="form-control" type="text" name="name" id="name" maxlength="100"/>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 form-group">
+                  <label for="phone">Phone Number</label>
+                  <input ng-model="formData.phone" class="form-control" type="number" name="phone" maxlength="20"/>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 form-group">
+                  <label for="dateOfBirth">Date of Birth</label>
+                  <input ng-model="formData.dateOfBirth" class="form-control" type="text" name="dateOfBirth" id="dateOfBirth" maxlength="100"/>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 form-group">
+                  <label for="countryOfOrigin">Country of Origin</label>
+                  <select ng-model="formData.countryOfOrigin" class="form-control" name="countryOfOrigin">
+                    <option value="">Please Select...</option>
+                    <option value="Austria">Austria</option>
+                    <option value="Belarus">Belarus</option>
+                    <option value="Canada">Canada</option>
+                    <option value="China">China</option>
+                    <option value="France">France</option>
+                    <option value="Germany">Germany</option>
+                    <option value="India">India</option>
+                    <option value="Israel">Israel</option>
+                    <option value="Italy">Italy</option>
+                    <option value="Japan">Japan</option>
+                    <option value="South Korea">South Korea</option>
+                    <option value="Lithuania">Lithuania</option>
+                    <option value="Monaco">Monaco</option>
+                    <option value="Netherlands">Netherlands (Holland)</option>
+                    <option value="Pakistan">Pakistan</option>
+                    <option value="Russia">Russia</option>
+                    <option value="Ukraine">Ukraine</option>
+                    <option value="UK">United Kingdom</option>
+                    <option value="USA">United States of America</option>
+                    <option value="Uzbekistan">Uzbekistan</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 form-group">
+                  <label for="gender">Gender</label><br/>
+                  <label class="checkbox_radio">
+                    <input ng-model="formData.gender" type="radio" name="gender" value="male"><span>Male</span>
+                  </label>
+                  <label class="checkbox_radio">
+                    <input ng-model="formData.gender" type="radio" name="gender" value="female"><span>Female</span>
+                  </label>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 form-group">
+                  <label for="allowedToContact">Allowed to Contact?</label>
+                  <br/>
+                  <label class="checkbox_radio">
+                    <input ng-model="formData.allowedToContact" type="checkbox" name="allowedToContact"><span> I allow to contact me via email or phone</span>
+                  </label>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 form-group">
+                  <label for="address">Address</label>
+                  <textarea ng-model="formData.address" class="form-control" id="address" name="address"></textarea>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 form-group clear-excluded">
+                  <label for="carMake">Car Make</label>
+                  <select ng-model="formData.carMake" class="form-control" name="carMake"multiple>
+                    <option value="Ford">Ford</option>
+                    <option value="Toyota">Toyota</option>
+                    <option value="BMW">BMW</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 form-group clear-excluded">
+                  <label for="additionalInfo">Additional Information</label><br/>
+                  <iframe name="additionalInfo" onmouseover="iframeHover()" src="iframe.html" width="370" height="82"></iframe>
+                  <br/><i><span id="iframeHoverMessage"></span></i>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 form-group">
+                  <button type="button" id="thirdPartyButton" onclick="thirdPartyAlert()">3rd party agreement (click)</button>
+                  <input name="thirdPartyAgreement" id="thirdPartyAgreement" type="hidden"/>
+                  <br/><span id="thirdPartyResponseMessage">&nbsp</span>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 form-group">
+                  <button type="button" onclick="window.open('new_window.html')">Related documents (click)</button>
+                  <input name="relatedDocuments" id="relatedDocuments" type="hidden"/>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 form-group attachment">
+                    <input ng-model="formData.attachment" type="file" id="attachment" name="attachment">
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 form-group agreedToPrivacyPolicy">
+                  <label class="required checkbox_radio">
+                    <input ng-model="formData.agreedToPrivacyPolicy" type="checkbox" name="agreedToPrivacyPolicy">
+                    <span> I have read and accept Privacy Policy.</span>
+                  </label>
+                </div>
+              </div>
+              <div id="nameDialog" title="Name">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+                  <label for="firstName">First Name</label>
+                  <input ng-model="formData.firstName" class="form-control" type="text" name="firstName" id="firstName" maxlength="100"/>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+                  <label for="middleName">Middle Name</label>
+                  <input ng-model="formData.middleName" class="form-control" type="text" name="middleName" id="middleName" maxlength="100"/>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+                  <label for="lastName">Last Name</label>
+                  <input ng-model="formData.lastName" class="form-control" type="text" name="lastName" id="lastName" maxlength="100"/>
+                </div>
+              </div>
+              <button class="btn btn-primary" type="submit" id="formSubmit" name="formSubmit">Submit</button>
+              <button class="btn" type="reset" id="formReset" name="formReset">Reset</button>
+              <button class="btn" type="button" id="formRefresh" name="formRefresh" onclick="refresh()">Refresh</button>
+            </div>
+          </div>
+        </section>
+      </fieldset>
+    </form>
+    </div>
+    <br/>
+    <br/>
+    <footer>
+    </footer>
+  </body>
+</html>
